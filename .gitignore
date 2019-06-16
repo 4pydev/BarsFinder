@@ -112,3 +112,6 @@ venv.bak/
 # json & zip data files
 *.json
 *.zip
+
+# any html files
+*.html

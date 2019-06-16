@@ -108,3 +108,7 @@ venv.bak/
 
 # VSCode settings
 .vscode/
+
+# json & zip data files
+*.json
+*.zip

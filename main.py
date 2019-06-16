@@ -1,6 +1,7 @@
 import json
 from yandex_geocoder import Client
 from geopy import distance
+import folium
 
 
 def get_data_from_file():
@@ -39,10 +40,36 @@ def get_nearest_bars(bars_list):
     return sorted(bars_list, key=lambda bar: bar['distance'])[:5]
 
 
+def save_map_html(user_coords, nearest_bars_list):
+    user_coords = list(user_coords)
+
+    bars_map = folium.Map(
+        location=user_coords,
+        zoom_start=20
+    )
+    folium.Marker(
+        location=user_coords,
+        tooltip="You're here!",
+        icon=folium.Icon(color='green')
+    ).add_to(bars_map)
+
+    for bar in nearest_bars_list:
+        bar_coords = [
+            bar['longitude'],
+            bar['latitude']
+        ]
+        folium.Marker(
+            location=bar_coords,
+            tooltip=bar['title']
+        ).add_to(bars_map)
+    bars_map.save('bars.html')
+
+
 def main():
     user_coords = get_user_coords()
     bars_list = get_bars_list(user_coords)
-    print(get_nearest_bars(bars_list))
+    nearest_bars = get_nearest_bars(bars_list)
+    save_map_html(user_coords, nearest_bars)
 
 
 if __name__ == '__main__':

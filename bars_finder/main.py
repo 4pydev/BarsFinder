@@ -5,7 +5,7 @@ import folium
 
 
 def get_data_from_file():
-    with open('bars_data.json', encoding='CP1251') as json_file:
+    with open('../bars_data.json', encoding='CP1251') as json_file:
         return json.load(json_file)
 
 
@@ -62,7 +62,7 @@ def save_map_html(user_coords, nearest_bars_list):
             location=bar_coords,
             tooltip=bar['title']
         ).add_to(bars_map)
-    bars_map.save('bars.html')
+    bars_map.save('../bars.html')
 
 
 def main():

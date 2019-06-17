@@ -2,7 +2,7 @@ from flask import Flask
 
 
 def return_bars_page():
-    with open('bars.html') as html_file:
+    with open('../bars.html') as html_file:
         return html_file.read()
 
 
